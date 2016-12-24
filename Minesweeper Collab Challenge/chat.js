@@ -5,19 +5,27 @@ var pubnub = new PubNub(
    }
 );
 
+var user = prompt("Please enter your name to start!");
+
 /* Get all the elements from the document and set each to a variable */
-var chatBox = $('chat_box'); // JQuery way
+var chatBox = document.getElementById('chat_box'); // JQuery way
 var chatInput = document.getElementById('chat_input'); // Normal Javascript way
 
 /* Set subscribe, receives the published message */
 pubnub.addListener({
    message: function(m) {
-      chatBox.innerHTML = ('' + m.message).replace( /[<>]/g, '' ) + '<br>' + chatBox.innerHTML
+      var date = new Date();
+      chatBox.innerHTML = chatBox.innerHTML + '<br>' + ('(' + date.toLocaleTimeString('en-US', { hour: "numeric", minute: 'numeric'}) + 
+         ') ' + m.message.user + ': ' +
+         m.message.val).replace( '', '' ); //+ '<br>' + chatBox.innerHTML
+      // When the text is overflown, scroll follows
+      chatBox.scrollTop = chatBox.scrollHeight;
+
    }
 });
 pubnub.subscribe(
    {
-      channel : ['chat-room']
+      channels : ['chat-room']
    }
 );
 
@@ -27,8 +35,11 @@ chatInput.addEventListener('keyup', function(e) {
       pubnub.publish(
          {
             channel : ['chat-room'],
-            message : 
-               chatInput.value
+            message : {
+               val: chatInput.value,
+               user : user
+            },
+            x : (chatInput.value='') // What happens to the input when published
          }
       );
    }

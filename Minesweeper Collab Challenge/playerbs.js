@@ -288,8 +288,10 @@ function checkForBombs(r, c, e) {
 	}
 
 	// Show number of bombs
-	if(numBomb > 0)
+	if(numBomb > 0) {
 		e.innerHTML = numBomb;
+		e.style.textAlign = "center";
+	}
 
 	return numBomb;
 }
