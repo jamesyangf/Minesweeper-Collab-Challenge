@@ -27,14 +27,6 @@
 	top: 70px;
 }
 
-#player_turn {
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	width: 120px;
-	font-weight: bold;
-}
-
 #gameBoard {
 	position:relative;
 	margin:0 auto 2em auto;
@@ -52,4 +44,37 @@
 	border: 1px solid #ddd;
 	width:40px;
 	height:40px;
+}
+
+
+/*********************** CHAT STYLE ***************************/
+
+#chat_room_title {
+	position: absolute;
+	font-weight: bold;
+	left: 700px;
+	top: 220px;
+}
+
+#input {
+	position: absolute;
+	left: 700px;
+	top: 590px;
+}
+
+#chat_input {
+	height: 18px;
+	width: 426px;
+}
+
+/* The chat box */
+#chat_box {
+	position: absolute;
+	border:1px solid #ACD8F0;
+	height: 338px; 
+	width: 430px;
+	left: 700px;
+	top: 250px;
+	overflow:scroll; /* If words go over the border */
+	font-size: 12px;
 }
