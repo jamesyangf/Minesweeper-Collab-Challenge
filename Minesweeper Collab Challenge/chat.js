@@ -6,8 +6,8 @@ var pubnub = new PubNub(
 );
 
 /* Get all the elements from the document and set each to a variable */
-var chatBox = $('chat_box');
-var chatInput = $('chat_input');
+var chatBox = $('chat_box'); // JQuery way
+var chatInput = document.getElementById('chat_input'); // Normal Javascript way
 
 /* Set subscribe, receives the published message */
 pubnub.addListener({
@@ -22,15 +22,15 @@ pubnub.subscribe(
 );
 
 /* When the enter key(13) is pressed ... publish */
-chatInput.addEventListener('keyip', function(e) {
-   if ((e.KeyCode || e.charCode) === 13) {
+chatInput.addEventListener('keyup', function(e) {
+   if ((e.keyCode || e.charCode) === 13) {
       pubnub.publish(
          {
             channel : ['chat-room'],
             message : 
                chatInput.value
          }
-      )
+      );
    }
 });
 
